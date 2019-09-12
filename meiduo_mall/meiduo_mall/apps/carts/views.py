@@ -1,10 +1,15 @@
 from django.shortcuts import render
 from django.views import View
 import json
-from meiduo_mall.utils import meiduo_json
-from goods.models import SKU
-from meiduo_mall.utils.response_code import RETCODE
+# from meiduo_mall.utils import meiduo_json
+# from goods.models import SKU
+# from meiduo_mall.utils.response_code import RETCODE
 from django import http
+
+from carts import meiduo_json
+from goods.models import SKU
+
+from payments.response_code import RETCODE
 from . import constants
 from django_redis import get_redis_connection
 

@@ -32,6 +32,7 @@ export default {
           this.errshow = true;
           return;
        };
+       // apis:'http://www.meiduo.site:8000/meiduo_admin'
        this.axios.post(cons.apis + '/authorizations/',
         {
           username:this.username,

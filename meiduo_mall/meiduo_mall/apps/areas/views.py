@@ -1,8 +1,20 @@
 from django.shortcuts import render
 from django.views import View
+
+from payments.response_code import RETCODE
 from .models import Area
 from django import http
-from meiduo_mall.utils.response_code import RETCODE
+
+from django.core.cache import cache
+from . import constants
+
+
+from django.shortcuts import render
+from django.views import View
+
+
+from .models import Area
+from django import http
 from django.core.cache import cache
 from . import constants
 
