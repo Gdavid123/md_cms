@@ -333,6 +333,9 @@ REST_FRAMEWORK = {
     ),
     # 指定DRF框架的异常处理函数
     'EXCEPTION_HANDLER': 'meiduo_admin.utils.exceptions.exception_handler',
+
+    # 全局分页类设置
+    'DEFAULT_PAGINATION_CLASS': 'meiduo_admin.utils.pagination.StandardResultPagination',
 }
 
 # JWT扩展配置
