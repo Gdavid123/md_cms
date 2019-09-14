@@ -12,10 +12,11 @@ class StandardResultPagination(PageNumberPagination):
 
     def get_paginated_response(self, data):
         """重写父类方法,自定义分页响应数据格式"""
-        return Response(OrderedDict([
+        a = OrderedDict([
             ('counts', self.page.paginator.count),
             ('lists', data),
             ('page', self.page.number),
             ('pages', self.page.paginator.num_pages),
             ('pagesize', self.get_page_size(self.request))
-        ]))
+        ])
+        return Response(a)
