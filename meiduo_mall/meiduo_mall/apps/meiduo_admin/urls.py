@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from rest_framework.routers import DefaultRouter
 
-from meiduo_admin.views import users, statistical, channels, skus, spus
+from meiduo_admin.views import users, statistical, channels, skus, spus, orders, permissions
 
 urlpatterns = [
     url(r'^authorizations/$', users.AdminAuthorizeView.as_view()),
@@ -20,6 +20,21 @@ urlpatterns = [
     url(r'^skus/simple/$', skus.SKUSimpleView.as_view()),
     url(r'^goods/simple/$', spus.SPUSimpleView.as_view()),
     url(r'^goods/(?P<pk>\d+)/specs/$', spus.SPUSpecView.as_view()),
+    # 权限管理
+    url(r'^permission/content_types/$', permissions.PermissionViewSet.as_view({
+        'get': 'content_types'
+    })),
+    # 用户组管理
+    url(r'^permission/simple/$', permissions.GroupViewSet.as_view({
+        'get': 'simple'
+    })),
+    # 管理员管理
+    url(r'^permission/groups/simple/$', permissions.AdminViewSet.as_view({
+        'get': 'simple'
+    })),
+    url(r'^goods/brands/simple/$',spus.SPUBrandsSimple.as_view()),
+    url(r'^goods/channel/categories/$',spus.SPUCategoriesSimple.as_view()),
+    url(r'^goods/channel/categories/(?P<pk>\d+)/$',spus.SPUSubCategoriesSimple.as_view()),
 ]
 
 
@@ -35,3 +50,33 @@ urlpatterns += router.urls
 router = DefaultRouter()
 router.register('skus', skus.SKUViewSet, base_name='skus')
 urlpatterns += router.urls
+
+
+# 订单管理
+router = DefaultRouter()
+router.register('orders', orders.OrdersViewSet, base_name='orders')
+urlpatterns += router.urls
+
+
+# 权限管理
+router = DefaultRouter()
+router.register('permission/perms', permissions.PermissionViewSet, base_name='perms')
+urlpatterns += router.urls
+
+
+# 用户组管理
+router = DefaultRouter()
+router.register('permission/groups', permissions.GroupViewSet, base_name='groups')
+urlpatterns += router.urls
+
+
+# 管理员管理
+router = DefaultRouter()
+router.register('permission/admins', permissions.AdminViewSet, base_name='admins')
+urlpatterns += router.urls
+
+# SPU管理
+router = DefaultRouter()
+router.register(r'goods', spus.SPUViewSet, base_name='goods')
+urlpatterns += router.urls
+
