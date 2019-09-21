@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^goods/brands/simple/$',spus.SPUBrandsSimple.as_view()),
     url(r'^goods/channel/categories/$',spus.SPUCategoriesSimple.as_view()),
     url(r'^goods/channel/categories/(?P<pk>\d+)/$',spus.SPUSubCategoriesSimple.as_view()),
+    url(r'^goods/specs/simple/$', spus.SpecsSimple.as_view()),
 ]
 
 
@@ -75,8 +76,23 @@ router = DefaultRouter()
 router.register('permission/admins', permissions.AdminViewSet, base_name='admins')
 urlpatterns += router.urls
 
-# SPU管理
+# SPU商品规格管理
 router = DefaultRouter()
-router.register(r'goods', spus.SPUViewSet, base_name='goods')
+router.register('goods/specs', spus.GoodsSpecsViewSet, base_name='specs')
 urlpatterns += router.urls
 
+# 品牌管理
+router = DefaultRouter()
+router.register('goods/brands', spus.GoodsBrandViewSet, base_name='brands')
+urlpatterns += router.urls
+
+# SPU管理
+router = DefaultRouter()
+router.register('goods', spus.SPUViewSet, base_name='goods')
+urlpatterns += router.urls
+
+
+# SPU管理
+router = DefaultRouter()
+router.register('specs/options', spus.SpecsOptionsViewSet, base_name='options')
+urlpatterns += router.urls

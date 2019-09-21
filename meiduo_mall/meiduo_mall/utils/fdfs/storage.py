@@ -1,6 +1,9 @@
-from django.core.files.storage import Storage
 from django.conf import settings
+from django.core.files.storage import Storage
+
 from fdfs_client.client import Fdfs_client
+
+from settings.dev import FDFS_CLIENT_CONF
 
 
 class FDFSStorage(Storage):
@@ -8,6 +11,7 @@ class FDFSStorage(Storage):
     def __init__(self, client_conf=None, base_url=None):
         if client_conf is None:
             client_conf = settings.FDFS_CLIENT_CONF
+
 
         self.client_conf = client_conf
 

@@ -66,5 +66,34 @@ class SubCategoriesSerializer(serializers.ModelSerializer):
 
 
 
-class SPUImageSerializer(serializers.ModelSerializer):
-    pass
+class GoodsSpecsSerializer(serializers.ModelSerializer):
+    spu = serializers.StringRelatedField(label='SPU商品名称')
+    spu_id = serializers.IntegerField(label='SPU商品id')
+
+    class Meta:
+        model = SPUSpecification
+        fields = ('id','name','spu','spu_id')
+
+
+
+class SpecsOptionSerializer(serializers.ModelSerializer):
+    spec = serializers.StringRelatedField(label='规格名称')
+    spec_id = serializers.IntegerField(label='规格id')
+
+    class Meta:
+        model = SpecificationOption
+        fields = ('id','value','spec','spec_id')
+
+
+class SpecsSimpleSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = SPUSpecification
+        fields = ('id','name')
+
+
+class GoodsBrandSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Brand
+        fields = ('id','name','logo','first_letter')
